@@ -65,7 +65,7 @@ public class Database extends Agent {
         public void action() {
             ACLMessage msg = receive();
 
-            if (msg != null /*&& "Category 1".equals(msg.getContent())*/) {
+            if (msg != null) {
             String content = msg.getContent();
                 String category = content.split("#")[1].trim();
                 sendQuestionList(category);
@@ -86,15 +86,14 @@ public class Database extends Agent {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                //int serialNumber = rs.getInt("serialNumber");
+
                 String questionText = rs.getString("questionText");
                 String option1 = rs.getString("option1");
                 String option2 = rs.getString("option2");
                 String option3 = rs.getString("option3");
                 String option4 = rs.getString("option4");
                 String correctAnswer = rs.getString("correctAnswer");
-               // System.out.println(questionText+"\n");
-                sendMessage(ACLMessage.INFORM, "\n"+questionText + "\n" + "1:"+option1+ "\n2:"+option2+ "\n3:"+option3+ "\n4:"+option4+"#"+correctAnswer, "questionInterface");
+                sendMessage(ACLMessage.INFORM, "\n"+questionText + "\n" + "1: "+option1+ "\n2: "+option2+ "\n3: "+option3+ "\n4: "+option4+"#"+correctAnswer, "questionInterface");
 
             }
 
@@ -136,12 +135,10 @@ public class Database extends Agent {
             pstmt.setString(4, userInfo.getPassword()); // Consider hashing passwords
 
             pstmt.executeUpdate();
-            System.out.println("User info stored successfully ... The available categories are:");
+            System.out.println("\nUser info stored successfully ... The available categories are:\n");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to store user info");
-
-
         }
     }
 }
