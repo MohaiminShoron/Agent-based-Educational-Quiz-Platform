@@ -6,6 +6,7 @@ How to load the program
    
   a. Add all the libraries to the library dependency of the project in intellij IDEA. Setting -> Project Structure -> Libraries -> +
 -> Java -> 'add the .jar files'
+  
   b. Add the MySql.jar file to the module dependency in intellij IDEA. Setting -> Project Structure -> Modules -> Dependencies -> +
 -> 'add the MySql .jar files'
 
