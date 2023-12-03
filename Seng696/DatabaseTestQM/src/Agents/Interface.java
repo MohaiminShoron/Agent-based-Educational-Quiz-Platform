@@ -137,7 +137,6 @@ public class Interface extends Agent {
                     System.out.println("Category: " + content);
                     availableCategories.add(content.split("\\.")[0].trim());  // Extract and store category serial number
                 } else {
-                    System.out.println("These are the available categories.");
                     requestCategorySelection();
                     done = true;
                 }
@@ -148,16 +147,15 @@ public class Interface extends Agent {
 
         private void requestCategorySelection() {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter your desired category number: ");
+            System.out.print("\nEnter your desired category number: ");
             String selectedCategory = scanner.nextLine();
 
             if (availableCategories.contains(selectedCategory)) {
-                System.out.println("You selected category: " + selectedCategory);
+                System.out.println("\nYou selected category: " + selectedCategory);
                 MessageHandler.sendInformD(selectedCategory, "quizmasterAgent");
             } else {
                 System.out.println("Choose from the available categories.");
                 requestCategorySelection();
-                //MessageHandler.sendInformD("Invalid category selection", "quizmasterAgent");
             }
         }
 
@@ -166,6 +164,6 @@ public class Interface extends Agent {
             return done;
         }
     }
-
 }
+
 
