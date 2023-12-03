@@ -1,25 +1,18 @@
 package Agents;
 
-import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
-
 import java.util.Objects;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import java.util.HashSet;
-import java.util.Set;
-
 
 public class QuestionInterface extends Agent {
     private MessageHandler messageHandler;
-    private Gson gson;
 
     @Override
     protected void setup() {
         System.out.println(getLocalName() + " is ready.");
-        gson = new Gson();
+
         messageHandler = new MessageHandler(this);
 
         addBehaviour(new ReceiveQuestionListBehaviour());
@@ -43,7 +36,6 @@ public class QuestionInterface extends Agent {
                     String contentCA = content.split("#")[1].trim();
                     System.out.println("\n"+sl+". "+question);
                     sl++;
-                    //System.out.println("CA:" +contentCA);
                     answerSelection(contentCA);
                 } else {
                     totalFlag = true;
@@ -56,30 +48,22 @@ public class QuestionInterface extends Agent {
 
         private void answerSelection(String contentCA) {
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter your answer number: ");
+            System.out.print("\nEnter your answer number: ");
             String selectedAns = scanner.nextLine();
             if(Objects.equals(contentCA, selectedAns)){
                 count++;
                 score+=10;
-              //  System.out.println("Correct Answer");
             }else{
                 count++;
-                //System.out.println("Wrong Answer");
             }
-            if(count >=5 ){
-          //  if(totalFlag ){
-              //  System.out.println("Your Points: "+score);
+            if(count >= 10){
                 MessageHandler.sendInformD(score+"", "scoreAgent");
                 done();
             }
-
         }
-
         @Override
         public boolean done() {
             return done;
         }
     }
-
-
 }
