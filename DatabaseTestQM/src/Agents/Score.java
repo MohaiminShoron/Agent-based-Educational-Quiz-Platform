@@ -30,10 +30,10 @@ public class Score extends Agent {
             }
         }
 
+
         @Override
         public boolean done() {
             return done;
         }
-
     }
 }
