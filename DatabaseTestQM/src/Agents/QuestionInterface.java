@@ -17,13 +17,13 @@ public class QuestionInterface extends Agent {
 
         addBehaviour(new ReceiveQuestionListBehaviour());
     }
-    //New
+   
     private class ReceiveQuestionListBehaviour extends SimpleBehaviour {
         private boolean done = false;
         public int count = 0;
         public int score = 0;
-        Boolean totalFlag = false;
         public char sl = 'A';
+        
         @Override
         public void action() {
 
@@ -38,7 +38,7 @@ public class QuestionInterface extends Agent {
                     sl++;
                     answerSelection(contentCA);
                 } else {
-                    totalFlag = true;
+//                    
                     done = true;
                 }
             } else {
