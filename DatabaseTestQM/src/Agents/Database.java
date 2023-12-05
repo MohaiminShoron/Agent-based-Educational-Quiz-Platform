@@ -53,7 +53,8 @@ public class Database extends Agent {
                 sendMessage(ACLMessage.INFORM, serialNumber + ". " + categoryName, "interface");
             }
 
-            sendMessage(ACLMessage.INFORM, "End of Categories", "interface");
+            sendMessage(ACLMessage.INFORM, "No Categories Available", "interface");
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to fetch categories");
@@ -64,7 +65,6 @@ public class Database extends Agent {
     private class HandleRetrievingQuestionsBehaviour extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = receive();
-
             if (msg != null) {
             String content = msg.getContent();
                 String category = content.split("#")[1].trim();
@@ -98,6 +98,7 @@ public class Database extends Agent {
             }
 
             sendMessage(ACLMessage.INFORM, "End of Questions", "questionInterface");
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to fetch Questions");
@@ -136,6 +137,7 @@ public class Database extends Agent {
 
             pstmt.executeUpdate();
             System.out.println("\nUser info stored successfully ... The available categories are:\n");
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to store user info");
