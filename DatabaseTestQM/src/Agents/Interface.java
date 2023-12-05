@@ -133,9 +133,10 @@ public class Interface extends Agent {
             ACLMessage categoryMsg = receive();
             if (categoryMsg != null) {
                 String content = categoryMsg.getContent();
-                if (!"End of Categories".equals(content)) {
+                if (!"No Categories Available".equals(content)) {
                     System.out.println("Category: " + content);
                     availableCategories.add(content.split("\\.")[0].trim());  // Extract and store category serial number
+
                 } else {
                     requestCategorySelection();
                     done = true;
@@ -164,6 +165,7 @@ public class Interface extends Agent {
             return done;
         }
     }
-
 }
+
+
 
