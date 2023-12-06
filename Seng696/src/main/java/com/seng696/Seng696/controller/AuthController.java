@@ -3,6 +3,7 @@ package com.seng696.Seng696.controller;
 import com.seng696.Seng696.entity.User;
 import com.seng696.Seng696.repository.UserRepository;
 import com.seng696.Seng696.security.JwtService;
+import com.seng696.Seng696.service.JadeClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,13 +23,30 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private final JadeClientService jadeClientService;
+
+    public AuthController(JadeClientService jadeClientService) {
+        this.jadeClientService = jadeClientService;
+    }
+
+
     @PostMapping("/user_registration")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
+    public String registerUser(@RequestBody User user) {
         // Encrypt the password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return ResponseEntity.ok("User registered successfully");
+        return jadeClientService.sendUserRegistrationToJade(user);
+//        userRepository.save(user);
+//        return ResponseEntity.ok("User registered successfully");
     }
+//    @PostMapping("/user_registration")
+//    public ResponseEntity<?> registerUser(@RequestBody User user) {
+//        // Encrypt the password
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        jadeClientService.sendUserRegistrationToJade(user);
+////        userRepository.save(user);
+//        return ResponseEntity.ok("User registered successfully");
+//    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) {
