@@ -27,13 +27,22 @@ export default {
 
       this.$axios.post(`${process.env.VUE_APP_API_URL}/api/login`, { username: this.username, password: this.password })
         .then(response => {
-          localStorage.setItem('token', response.data);
-          this.$router.push('/');
-        })
+          console.log(response.data);
+          localStorage.setItem('token', "response.data.token");
+          this.$store.commit('setUser', {
+          userId: response.data.userId,
+          username: response.data.username
+        });
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('username', response.data.username);
+        
+        // Redirect the user to the home page after successful login
+        this.$router.push('/');
+      })
         .catch(error => {
           // Handle error
           console.log("error: ", error)
-          alert("Something went wrong try again")
+          alert("Login failed, please try again.")
         });
 
       console.log('Logging in user...');

@@ -78,7 +78,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <p>Your score is: {{ score }}/{{ questions.length *10 }}</p>
+            <p>Your score is: {{ score }}/{{ questions.length * 10 }}</p>
           </div>
           <div class="modal-footer">
             <button
@@ -119,8 +119,21 @@ export default {
     };
   },
   created() {
-    this.fetchQuestions();
+    // Check if user details are stored in Vuex or localStorage
+    this.userId = this.$store.state.userId || localStorage.getItem("userId");
+    this.username =
+      this.$store.state.username || localStorage.getItem("username");
+
+    if (!this.userId || !this.username) {
+      // If user details are not found, redirect to the login page
+      alert("Please login to continue.");
+      this.$router.push("/login");
+    } else {
+      // If user details are found, proceed to fetch categories or questions
+      this.fetchQuestions();
+    }
   },
+
   methods: {
     fetchQuestions() {
       this.loading = true;
@@ -162,11 +175,15 @@ export default {
       // Show the results modal
       this.showModal();
 
+      const userId = localStorage.getItem("userId") || this.$store.state.userId;
+      const username =
+        localStorage.getItem("username") || this.$store.state.username;
+
       // Preparing the score data for the API
       const scoreData = {
-        userId: this.userId,
-        username: this.username,
-        scoreValue: score,
+        userId: userId,
+        username: username,
+        scoreValue: this.score,
         categoryId: this.categoryId,
       };
       console.log("Submitting scoreData:", scoreData);
