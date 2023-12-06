@@ -22,8 +22,10 @@ export default {
   },
   methods: {
     logoutUser() {
-      // Clear token from localStorage
-      localStorage.removeItem('token');
+      // // Clear token from localStorage
+      // localStorage.removeItem('token');
+
+      this.$store.dispatch('logoutUser');
       // Redirect to login page
       this.$router.push('/login');
     },
