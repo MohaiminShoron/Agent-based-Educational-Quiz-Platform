@@ -50,7 +50,18 @@
             </div>
           </div>
         </div>
-        <div class="d-grid gap-2">
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <!-- Show Leaderboard Button -->
+          <button
+            v-if="submitted && score > 0"
+            type="button"
+            class="btn btn-info"
+            @click="showLeaderboard"
+          >
+            Show Leaderboard
+          </button>
+
+          <!-- Submit Quiz Button -->
           <button type="submit" class="btn btn-primary" :disabled="submitted">
             Submit Quiz
           </button>
@@ -101,7 +112,7 @@ import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 export default {
   props: {
     categoryId: {
-      type: String,
+      type: [Number, String],
       required: true,
     },
   },
@@ -168,7 +179,7 @@ export default {
       // Each correct answer is worth 10 points
       const score = correctCount * 10;
 
-      // Set the calculated score
+      // Setting the calculated score
       this.score = score;
       this.submitted = true;
 
@@ -197,6 +208,13 @@ export default {
           console.error("Error posting score:", error);
         });
     },
+    showLeaderboard() {
+      // Navigating to the leaderboard page with the categoryId
+      this.$router.push({
+        name: "Leaderboard",
+        params: { categoryId: this.categoryId },
+      });
+    },
     showModal() {
       // Using Bootstrap's modal method to show the results modal
       const scoreModal = new bootstrap.Modal(this.$refs.scoreModal);
@@ -206,13 +224,6 @@ export default {
       const correct = options.find((option) => option.correct);
       return correct ? correct.text : "Unknown";
     },
-
-    // selectAnswer(questionIndex, option) {
-    //   this.userAnswers[questionIndex] = {
-    //     text: option.text,
-    //     correct: option.correct,
-    //   };
-    // },
     selectAnswer(questionIndex, option) {
       this.userAnswers[questionIndex] = option;
     },
