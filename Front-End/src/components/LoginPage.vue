@@ -27,7 +27,6 @@ export default {
 
       this.$axios.post(`${process.env.VUE_APP_API_URL}/api/login`, { username: this.username, password: this.password })
         .then(response => {
-          console.log(response.data);
           localStorage.setItem('token', "response.data.token");
           this.$store.commit('setUser', {
           userId: response.data.userId,
