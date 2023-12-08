@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="card home-card">
       <div class="card-body">
-        <h2 class="card-title text-center mb-4">Welcome to the Quiz Application</h2>
+        <h2 class="card-title text-center mb-4">Welcome to the Quiz Platform</h2>
         <p class="card-text text-center">Start a quiz and test your knowledge!</p>
         <div class="d-grid gap-2 col-6 mx-auto">
           <router-link to="/categories" class="btn btn-primary btn-lg">Take a Quiz</router-link>
