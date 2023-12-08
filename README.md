@@ -1,7 +1,7 @@
 # Program Description
 
-### There are two agent-based programs in this branch. For this project, the main focus is on "QMSoftware"
-"DatabaseTestQM" has also been included to show the change in implementation when we have a different database structure.
+### There are two agent-based programs in this branch. For this project, the main focus is on "DatabaseTestQM"
+"QMSoftware" has also been included to show the change in implementation when we have a different database structure.
 
 The program descriptions for each program are:
 
@@ -16,12 +16,12 @@ This program is built on a four-table database (database name "seng696") structu
   - The table 'questions' has three columns such as id, text, and category_id
   - The table 'options' four columns such as id, is_correct, text, and question_id.
 
-### How run the program "QMSoftware"? ...
+### How run the program "DatabaseTestQM"? ...
 
-Step 1: Load the program "QMSoftware"
+Step 1: Load the program "DatabaseTestQM"
 
    1. Clone the project files.
-   2. Open the "QMSoftware" project in a new window on the IDE. Preferably in the intellij IDEA.
+   2. Open the "DatabaseTestQM" project in a new window on the IDE. Preferably in the intellij IDEA.
 
 Step 2: Loading the libraries
    
@@ -33,13 +33,13 @@ Step 2: Loading the libraries
 Step 3: Handling the database
 
    1. Turn on the MySQL server.
-   2. Make a new schema on the MySql workbench and import or copy-paste the query in the "seng696.sql" file. Run the query to generate tables.
+   2. Make a new schema on the MySql workbench and import or copy-paste the query in the "DatabaseTestQM.sql" file. Run the query to generate tables.
    3. Make the necessary modifications (server link, username, password) to the DatabaseConnectionTest file and the database agent.
 
 Step 4: Run the program
 
 1. Go to Edit Configuration.
-2. Give a program name. Preferably "QMsoftware".
+2. Give a program name. Preferably "DatabaseTestQM".
 3. Add class name; write "jade.Boot".
 4. Add the following arguments:
 
