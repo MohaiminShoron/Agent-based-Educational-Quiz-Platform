@@ -30,7 +30,7 @@ public class Score extends Agent {
             ACLMessage scoreMsg = receive();
             if (scoreMsg != null) {
                 String content = scoreMsg.getContent();
-                System.out.println("\nYour Score is " + content + " out of 5\n");
+                System.out.println("\nYour Score is " + content + " out of 5.\n");
                 System.out.println("The quiz session has ended.\n");
                 done = true;
             } else {
