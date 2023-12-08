@@ -10,7 +10,6 @@ import LoginPage from "./components/LoginPage.vue";
 import HomePage from "./components/HomePage.vue";
 import QuizCategories from "./components/QuizCategories.vue";
 import QuizPage from "./components/QuizPage.vue";
-// import LeaderboardPage from "./components/LeaderboardPage.vue";
 import LeaderboardComponent from "./components/LeaderboardComponent.vue";
 
 const routes = [

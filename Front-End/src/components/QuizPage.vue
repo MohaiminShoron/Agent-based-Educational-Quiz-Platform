@@ -1,12 +1,17 @@
 <template>
-  <div class="quiz-page container py-5">
-    <h2
+  <div class="quiz-page">
+  <div class="quiz-container">
+    <!-- <h2
       class="text-center mb-4"
       v-for="category in categories"
       :key="category.id"
     >
       {{ categoryName }}
-    </h2>
+    </h2> -->
+    <div class="timer-container mb-4">
+      <h3 v-if="submitted">Quiz Completed</h3>
+      <h3 v-else>Time remaining: {{ timer }} seconds</h3>
+    </div>
     <div v-if="loading" class="text-center">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -55,14 +60,14 @@
           <button
             v-if="submitted && score > 0"
             type="button"
-            class="btn btn-info"
+            class="btn btn-custom-leaderboard"
             @click="showLeaderboard"
           >
             Show Leaderboard
           </button>
 
           <!-- Submit Quiz Button -->
-          <button type="submit" class="btn btn-primary" :disabled="submitted">
+          <button type="submit" class="btn btn-custom-submit" :disabled="submitted">
             Submit Quiz
           </button>
         </div>
@@ -104,6 +109,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -127,6 +133,8 @@ export default {
       score: 0,
       userId: "",
       username: "",
+      timer: 60,
+      interval: null,
     };
   },
   created() {
@@ -144,7 +152,9 @@ export default {
       this.fetchQuestions();
     }
   },
-
+  mounted() {
+    this.startTimer();
+  },
   methods: {
     fetchQuestions() {
       this.loading = true;
@@ -161,7 +171,21 @@ export default {
           // alert("Failed to load questions.");
         });
     },
+    startTimer() {
+      this.interval = setInterval(() => {
+        if (this.timer > 0) {
+          this.timer--;
+        } else {
+          this.stopTimer();
+          this.submitQuiz();
+        }
+      }, 1000);
+    },
+    stopTimer() {
+      clearInterval(this.interval);
+    },
     submitQuiz() {
+      this.stopTimer();
       // Calculate the score
       let correctCount = 0;
       this.questions.forEach((question, index) => {
@@ -215,6 +239,9 @@ export default {
         params: { categoryId: this.categoryId },
       });
     },
+    beforeDestroy() {
+      this.stopTimer();
+    },
     showModal() {
       // Using Bootstrap's modal method to show the results modal
       const scoreModal = new bootstrap.Modal(this.$refs.scoreModal);
@@ -233,45 +260,92 @@ export default {
 
 <style scoped>
 .quiz-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('~@/assets/background.jpg'); 
+  background-size: cover;
+  background-position: center;
+}
+
+.quiz-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 800px;
-  margin: auto;
 }
 
-.form-check-label {
-  margin-left: 0.3rem;
-}
-.loading {
+.timer-container {
   text-align: center;
+  background-color: #f8f9fa;
+  padding: 0.75rem 1.25rem;
+  border-radius: .25rem;
+  margin-bottom: 1rem;
 }
 
-.questions-list {
-  list-style-type: none;
-  padding: 0;
+.timer-container h3 {
+  color: #dc3545; /* Bootstrap danger color for emphasis */
+  font-weight: bold;
+  margin: 0;
 }
 
-.question-item {
-  margin-bottom: 15px;
+.card {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.options-list {
-  list-style-type: none;
-  padding: 0;
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
 }
 
-.option-item {
-  background-color: #f4f4f4;
-  margin-bottom: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+.card-body {
+  background-color: #fff;
 }
-.feedback {
-  margin-top: 0.5rem;
+
+.card-footer {
+  background-color: #f8f9fa;
 }
+
 .correct-answer {
   color: #28a745; /* Bootstrap success color */
 }
+
 .incorrect-answer {
   color: #dc3545; /* Bootstrap danger color */
+}
+.btn-custom-leaderboard {
+  background-color: #f9a825; 
+  color: white; 
+  border: none; 
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn-custom-leaderboard:hover {
+  background-color: #fbc02d; 
+}
+
+.btn-custom-submit {
+  background-color: #5e35b1; 
+  color: white; 
+  border: none; 
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn-custom-submit:hover {
+  background-color: #673ab7; 
+  cursor: pointer; 
+}
+
+/* If the button is disabled, applying different styling */
+.btn-custom-submit:disabled {
+  background-color: #9575cd; /* Lighter purple color to indicate disabled state */
+  color: #fff; 
+  cursor: not-allowed; /* Change cursor to not-allowed icon */
 }
 </style>
