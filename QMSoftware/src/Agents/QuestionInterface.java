@@ -16,6 +16,8 @@ import jade.core.AID;
 import java.util.Objects;
 import java.util.Scanner;
 
+// Main QuestionInterface Agent Class, which extends the Agent library.
+
 public class QuestionInterface extends Agent {
     private MessageHandler messageHandler;
 
