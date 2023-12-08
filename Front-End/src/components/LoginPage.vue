@@ -1,16 +1,27 @@
 <template>
   <div class="login-container">
-    <h2>Login</h2>
-    <form @submit.prevent="loginUser" class="login-form">
-      <label for="username">Username:</label>
-      <input type="text" v-model="username" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" required />
-      <br />
-      <button type="submit">Login</button>
-    </form>
-    <router-link to="/register">Go to Register</router-link>
+    <div class="card login-card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Login</h2>
+        <form @submit.prevent="loginUser">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" v-model="username" class="form-control" id="username" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" v-model="password" class="form-control" id="password" required />
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success btn-lg">Login</button>
+            <router-link to="/register" class="btn btn-outline-primary btn-lg">Go to Register</router-link>
+          </div>
+          <!-- <div class="mt-4 text-center">
+            <router-link to="/register">Go to Register</router-link>
+          </div> -->
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,43 +60,55 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  background-image: url('~@/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.login-form {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-input {
+.login-card {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 16px;
-  box-sizing: border-box;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
+.form-label {
+  font-size: 1.2rem;
+}
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.router-link {
+  text-decoration: none; /* Remove underline from links */
+}
+
+.btn-lg {
+  padding: 0.5rem 1rem; 
+  font-size: 1rem; 
+}
+
+/*  media queries for responsiveness */
+@media (max-width: 576px) {
+  .btn-lg {
+    padding: 0.5rem; /* Smaller padding for small screens */
+    font-size: 0.9rem; /* Smaller font size for small screens */
+  }
 }
 </style>

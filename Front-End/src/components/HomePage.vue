@@ -1,11 +1,13 @@
 <template>
   <div class="home-container">
-    <div class="text-center">
-      <h2>Welcome to the Quiz Platform</h2>
-      <p>Select a category and test your knowledge!</p>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <router-link to="/categories" class="btn btn-primary btn-lg">Take a Quiz</router-link>
-        <button @click="logoutUser" class="btn btn-secondary btn-lg">Logout</button>
+    <div class="card home-card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Welcome to the Quiz Application</h2>
+        <p class="card-text text-center">Start a quiz and test your knowledge!</p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <router-link to="/categories" class="btn btn-primary btn-lg">Take a Quiz</router-link>
+          <button @click="logoutUser" class="btn btn-secondary btn-lg">Logout</button>
+        </div>
       </div>
     </div>
   </div>
@@ -40,38 +42,59 @@ export default {
 .home-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f8f9fa; /* Light gray background */
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('~@/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.text-center {
-  text-align: center;
+.home-card {
+  width: 100%;
+  max-width: 600px; /* Adjusted max-width to make the card wider */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin: auto; /* Added to center the card horizontally */
+}
+
+.card-title {
+  font-size: 2rem;
+  color: var(--bs-primary);
+  margin-bottom: 1rem; 
+}
+.card-text {
+  font-size: 1.25rem; 
+  color: var(--bs-secondary); 
+  margin-bottom: 1.5rem; 
+}
+.btn-primary {
+  background-color: #007bff; 
+  border-color: #007bff; 
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; 
+  border-color: #0056b3; 
+}
+
+.btn-secondary {
+  background-color: #6c757d; 
+  border-color: #6c757d; 
+}
+
+.btn-secondary:hover {
+  background-color: #545b62; 
+  border-color: #545b62; 
+}
+.btn-lg {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .d-grid {
-  max-width: 300px; /* Set a max-width for buttons for better aesthetics */
-}
-.logout-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 16px;
-}
-
-.categories-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 16px;
+  max-width: none;
 }
 </style>
