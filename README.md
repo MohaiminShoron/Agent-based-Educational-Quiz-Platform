@@ -1,5 +1,7 @@
-## There are two agent-based programs in this branch. For this project, the main focus is on "QMSoftware". 
-"DatabaseTestQM" has been also included to show the change in implementation when we have a different database structure.
+# Program Description
+
+### There are two agent-based programs in this branch. For this project, the main focus is on "QMSoftware"
+"DatabaseTestQM" has also been included to show the change in implementation when we have a different database structure.
 
 The program descriptions for each program are:
 
