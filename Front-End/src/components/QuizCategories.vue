@@ -1,13 +1,13 @@
 <template>
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <h2 class="text-center mb-4">Quiz Categories</h2>
+  <div class="categories-container">
+    <div class="card categories-card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Quiz Categories</h2>
         <div v-if="categories.length">
-          <div class="card mb-3" v-for="category in categories" :key="category.id">
-            <div class="card-body d-flex justify-content-between align-items-center">
-              <h5 class="card-title mb-0">{{ category.name }}</h5>
-              <button @click="startQuiz(category.id)" class="btn btn-outline-primary">Start Quiz</button>
+          <div v-for="category in categories" :key="category.id" class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="category-name">{{ category.name }}</h5>
+              <button @click="startQuiz(category.id)" class="btn btn-start-quiz">Start Quiz</button>
             </div>
           </div>
         </div>
@@ -16,7 +16,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -47,25 +46,61 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  max-width: 800px; 
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('~@/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.btn-outline-primary {
-  padding: 0.375rem 0.75rem;
-}
-
-.btn-outline-primary:hover {
-  color: #fff;
-  background-color: #0d6efd; 
-  border-color: #0d6efd;
-}
-
-.card {
-  margin-bottom: 1rem;
+.categories-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.category-name {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.btn-start-quiz {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-start-quiz:hover {
+  background-color: #43a047;
+}
+
+@media (max-width: 767px) {
+  .categories-card {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .btn-start-quiz {
+    padding: 0.375rem 1rem;
+  }
 }
 </style>
