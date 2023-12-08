@@ -1,11 +1,14 @@
 package com.seng696.Seng696.controller;
 
+import com.google.gson.Gson;
 import com.seng696.Seng696.dto.ScoreDTO;
 import com.seng696.Seng696.entity.Score;
 import com.seng696.Seng696.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -14,20 +17,41 @@ import java.util.List;
 @RequestMapping("/api")
 public class ScoreController {
 
-    @Autowired
-    private ScoreService scoreService;
+    private final RestTemplate restTemplate;
+    private final ScoreService scoreService;
+
+    public ScoreController(RestTemplateBuilder restTemplateBuilder, ScoreService scoreService) {
+        this.restTemplate = restTemplateBuilder.build();
+        this.scoreService = scoreService;
+    }
+
+//    @PostMapping("/scores")
+//    public ResponseEntity<Score> saveScore(@RequestBody ScoreDTO scoreDTO) {
+//        Score score = new Score();
+//        score.setUserId(scoreDTO.getUserId());
+//        score.setUsername(scoreDTO.getUsername());
+//        score.setScoreValue(scoreDTO.getScoreValue());
+//        score.setCategoryId(scoreDTO.getCategoryId());
+//
+//        Score savedScore = scoreService.saveScore(score);
+//        return ResponseEntity.ok(savedScore);
+//    }
 
     @PostMapping("/scores")
-    public ResponseEntity<Score> saveScore(@RequestBody ScoreDTO scoreDTO) {
-        Score score = new Score();
-        score.setUserId(scoreDTO.getUserId());
-        score.setUsername(scoreDTO.getUsername());
-        score.setScoreValue(scoreDTO.getScoreValue());
-        score.setCategoryId(scoreDTO.getCategoryId());
+    public String saveScore(@RequestBody ScoreDTO scoreDTO) {
+        // Send scoreDTO to the JADE HttpServerAgent
+        String url = "http://localhost:8000/saveScore";
+        ResponseEntity<String> response = restTemplate.postForEntity(url, scoreDTO, String.class);
+        if(response.getBody().equals("Score Received")){
+            return "Scored saved successfully";
+        }
 
-        Score savedScore = scoreService.saveScore(score);
-        return ResponseEntity.ok(savedScore);
+        else
+            return "Score saving failed";
+
+
     }
+
 
     @GetMapping("/leaderboard/{categoryId}")
     public ResponseEntity<List<Score>> getLeaderboard(@PathVariable Long categoryId, @RequestParam(defaultValue = "5") int limit) {
