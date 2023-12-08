@@ -1,5 +1,5 @@
-There are two agent-based programs in this branch. For this project, the main focus is on "QMSoftware". "DatabaseTestQM" has been also included to show the change in
-implementation when we have a different database structure.
+There are two agent-based programs in this branch. For this project, the main focus is on "QMSoftware". 
+"DatabaseTestQM" has been also included to show the change in implementation when we have a different database structure.
 
 The program descriptions for each program are:
 
@@ -14,24 +14,30 @@ This program is built on a four-table database (database name "seng696") structu
   a. The table 'questions' has three columns such as id, text, and category_id
   b. The table 'options' four columns such as id, is_correct, text, and question_id.
 
+How run the program "QMSoftware"? ...
 
-How to load the program "QMSoftware"
+Step 1: Load the program "QMSoftware"
 
-1. Clone the project files.
+   a. Clone the project files.
+   b. Open the "QMSoftware" project in a new window on the IDE. Preferably in the intellij IDEA.
 
-2. Loading the libraries
+Step 2: Loading the libraries
    
   a. Add all the libraries to the library dependency of the project in intellij IDEA. 
   Setting -> Project Structure -> Libraries -> + -> Java -> 'add the .jar files'
-  
   b. Add the MySql.jar file to the module dependency in intellij IDEA. Setting -> Project Structure -> Modules -> Dependencies -> + -> 'add the MySql .jar files'
 
-3. Turn on the MySQL server. Make the necessary modifications (server link, username, password) to the DatabaseConnectionTest file.
+Step 3: Handling the database
 
-How to run the program
+   a. Turn on the MySQL server.
+   b. Make a new schema on the MySql workbench and import or copy-paste the query in the "seng696.sql" file. Run the query to generate tables.
+   c. Make the necessary modifications (server link, username, password) to the DatabaseConnectionTest file and the database agent.
 
-1. Go to Edit Configuration
-2. Add class name; write "jade.boot"
-3. Add the following arguments:
+Step 4: Run the program
+
+1. Go to Edit Configuration.
+2. Give a program name. Preferably "QMsoftware".
+3. Add class name; write "jade.Boot".
+4. Add the following arguments:
 
 -agents interface:Agents.Interface;quizMasterAgent:Agents.QuizMaster;databaseAgent:Agents.Database;questionInterface:Agents.QuestionInterface;scoreAgent:Agents.Score
