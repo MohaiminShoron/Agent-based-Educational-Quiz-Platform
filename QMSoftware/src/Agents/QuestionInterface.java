@@ -92,7 +92,7 @@ public class QuestionInterface extends Agent {
             }
         }
 
-      //Processes the score and sends it the score agent.
+        //Processes the score and sends it the score agent.
         
         private void sendScore() {
             ACLMessage scoreMsg = new ACLMessage(ACLMessage.INFORM);
