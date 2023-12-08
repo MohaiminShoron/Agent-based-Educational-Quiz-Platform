@@ -26,7 +26,7 @@ Step 1: Load the program "QMSoftware"
 Step 2: Loading the libraries
    
   1. Add all the libraries to the module of the project in intellij IDEA. 
-  Setting -> Project Structure -> module -> Dependencies -> + -> all the .jar files'
+  Setting -> Project Structure -> module -> Dependencies -> + -> all the .jar files (in the Libraries folder in the program files).
   2. Add the MySql.jar file and jade.jar file to the libraries in intellij IDEA.
   Setting -> Project Structure -> Libraries -> + 'New Project Library' -> add the MySql .jar file -> add the jade.jar file
 
