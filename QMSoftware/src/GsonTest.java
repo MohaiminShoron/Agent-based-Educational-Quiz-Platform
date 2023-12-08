@@ -1,3 +1,5 @@
+// Code for testing the Gson library connection
+
 import com.google.gson.Gson;
 
 public class GsonTest {
