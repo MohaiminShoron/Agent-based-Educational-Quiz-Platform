@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Main Database Agent Class, which extends the Agent library.
 
 public class Database extends Agent {
     
