@@ -1,3 +1,12 @@
+/*    
+    The QuestionInterface works as an helping hand to the interface agent to print the questions of the desired category in the 
+    proper manner.
+    1. Prints the questions, with options.
+    2. Has the command to enter the answer from the user.
+    3. computes the score by evaluating the entered answer with the right answer.
+    4. Prints the score with the help of the score agent.
+*/
+
 package Agents;
 
 import jade.core.Agent;
@@ -10,15 +19,21 @@ import java.util.Scanner;
 public class QuestionInterface extends Agent {
     private MessageHandler messageHandler;
 
+     // This is the setup() function which holds the 'agent has been started' comment and the implemented behaviours in this agent.
+
     @Override
     protected void setup() {
         System.out.println(getLocalName() + " is ready.");
-
         messageHandler = new MessageHandler(this);
-
         addBehaviour(new ReceiveQuestionListBehaviour());
     }
 
+    /* 
+       This behavior class is for receiving the questions sent from the database. It then calls the 'processQuestion(content)' 
+       function for further processing of the questions and printing them. It also calls the function called 'sendScore()' to 
+       handle the scoring mechanism of the project.
+    */
+    
     private class ReceiveQuestionListBehaviour extends SimpleBehaviour {
         private boolean done = false;
         private int count = 0;
@@ -41,6 +56,11 @@ public class QuestionInterface extends Agent {
                 block();
             }
         }
+
+        /*
+        This processQuestion(String content) function processes the received questions. It holds the mechanism of receiving the
+        entered answers by the users. It computes the score per question and sends the score to the score agent for printing.
+        */
 
         private void processQuestion(String content) {
             // Split the content into question and options
@@ -72,6 +92,8 @@ public class QuestionInterface extends Agent {
             }
         }
 
+      //Processes the score and sends it the score agent.
+        
         private void sendScore() {
             ACLMessage scoreMsg = new ACLMessage(ACLMessage.INFORM);
             scoreMsg.addReceiver(new AID("scoreAgent", AID.ISLOCALNAME));
