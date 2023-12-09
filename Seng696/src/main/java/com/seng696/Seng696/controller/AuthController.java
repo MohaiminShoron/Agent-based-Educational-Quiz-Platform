@@ -9,6 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
+/**
+ * The AuthController class is responsible for handling all authentication-related actions.
+ * It provides endpoints for user registration and login.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
@@ -31,23 +36,29 @@ public class AuthController {
     }
 
 
+    /**
+     * Endpoint for user registration.
+     * Encrypts the user's password and sends the registration information to the JADE system.
+     *
+     * @param user The user data for registration.
+     * @return A response message indicating the registration result.
+     */
     @PostMapping("/user_registration")
     public String registerUser(@RequestBody User user) {
         // Encrypt the password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return jadeClientService.sendUserRegistrationToJade(user);
-//        userRepository.save(user);
-//        return ResponseEntity.ok("User registered successfully");
-    }
-//    @PostMapping("/user_registration")
-//    public ResponseEntity<?> registerUser(@RequestBody User user) {
-//        // Encrypt the password
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        jadeClientService.sendUserRegistrationToJade(user);
-////        userRepository.save(user);
-//        return ResponseEntity.ok("User registered successfully");
-//    }
 
+    }
+
+
+    /**
+     * Endpoint for user authentication.
+     * Verifies the user credentials and generates a JWT token if authentication is successful.
+     *
+     * @param loginRequest The user login credentials.
+     * @return A ResponseEntity containing the user details or an error message.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) {
         User user = userRepository.findByUsername(loginRequest.getUsername());

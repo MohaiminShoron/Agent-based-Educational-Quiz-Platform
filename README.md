@@ -10,7 +10,7 @@ The Educational Quiz Platform is a web-based application designed to offer an in
 
 ## Front-End
 
-This project is an educational quiz platform developed using Vue.js 3. It allows users to register, log in, and take quizzes on various topics. The application features a dynamic and user-friendly interface, making it suitable for users of all ages, including kids.
+The frontend of this project is developed using Vue.js 3. It allows users to register, log in, and take quizzes on various topics. The application features a dynamic and user-friendly interface, making it suitable for users of all ages, including kids.
 
 
 
@@ -78,6 +78,65 @@ The Spring Boot application serves as an API middleware, facilitating communicat
 - POST /api/scores: Submits and saves quiz scores.
 - GET /api/leaderboard/{category_id}: Fetch top scores for given category to show leaderboard.
 
+### Project Structure
+
+The Spring Boot middleware application is organized into several packages, each with a specific purpose:
+
+Seng696
+│
+└───src
+└───main
+└───java
+└───com.seng696.Seng696
+│
+├───config
+│ └───ApplicationProperties.java
+│
+├───controller
+│ ├───AuthController.java
+│ ├───CategoryController.java
+│ ├───QuestionController.java
+│ └───ScoreController.java
+│
+├───dto
+│ ├───OptionDTO.java
+│ ├───QuestionDTO.java
+│ └───ScoreDTO.java
+│
+├───entity
+│ ├───Category.java
+│ ├───Option.java
+│ ├───Question.java
+│ ├───Score.java
+│ └───User.java
+│
+├───repository
+│ ├───CategoryRepository.java
+│ ├───QuestionRepository.java
+│ ├───ScoreRepository.java
+│ └───UserRepository.java
+│
+├───security
+│ ├───AuthEntryPointJwt.java
+│ ├───JwtRequestFilter.java
+│ └───SecurityConfigurer.java
+│
+└───service
+├───CategoryService.java
+├───JadeClientService.java
+├───QuestionService.java
+└───ScoreService.java
+
+
+- `config`: Contains configuration classes for the application.
+- `controller`: Contains REST controllers that handle HTTP requests and responses.
+- `dto`: Data Transfer Objects used to pass data between different layers of the application.
+- `entity`: JPA entities that represent tables in the database.
+- `repository`: Spring Data JPA repositories for CRUD operations on the database.
+- `security`: Security configuration for authentication and authorization.
+- `service`: Service classes that contain business logic.
+
+
 ## Agent-Communication Application
 
 The JADE agent system orchestrates the backend functionalities of the quiz platform, handling data operations and agent interactions.
@@ -86,6 +145,19 @@ The JADE agent system orchestrates the backend functionalities of the quiz platf
 
 - HttpServerAgent: Acts as an interface between the Spring Boot application and the JADE system, handling HTTP requests and translating them into agent communication.
 - DatabaseAgent: Manages interactions with the MySQL database for storing and retrieving user data, scores, and categories.
+
+### Setup
+   
+- Add all the libraries to the module of the project in intellij IDEA. 
+  Setting -> Project Structure -> module -> Dependencies -> + -> all the .jar files (in the Libraries folder in the program files).
+- Add the MySql.jar file and jade.jar file to the libraries in intellij IDEA.
+  Setting -> Project Structure -> Libraries -> + 'New Project Library' -> add the MySql .jar file -> add the jade.jar file
+
+To run the application
+
+- Go to Edit Configuration.
+- Add class name; write "jade.Boot".
+- Add the following arguments: -agents serverAgent:agents.HttpServerAgent;databaseAgent:agents.DatabaseAgent
 
 
 ## Database Schema
@@ -131,3 +203,9 @@ The database schema for the Educational Quiz Platform is designed to support eff
 - **Fields**:
   - `CategoryId` (Primary Key): A unique identifier for each category.
   - `CategoryName`: The name of the quiz category (e.g., Science, Mathematics).
+
+
+## Other tools and resources
+
+- Postman: To test APIs. the api collection for the middleware application is added to the repository
+- SQL file containing the tables with values also exported and added to the repository

@@ -12,6 +12,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+/**
+ * The ScoreController class is responsible for handling all score-related API endpoints.
+ * It provides endpoints for saving a score and retrieving the leaderboard.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
@@ -25,18 +29,13 @@ public class ScoreController {
         this.scoreService = scoreService;
     }
 
-//    @PostMapping("/scores")
-//    public ResponseEntity<Score> saveScore(@RequestBody ScoreDTO scoreDTO) {
-//        Score score = new Score();
-//        score.setUserId(scoreDTO.getUserId());
-//        score.setUsername(scoreDTO.getUsername());
-//        score.setScoreValue(scoreDTO.getScoreValue());
-//        score.setCategoryId(scoreDTO.getCategoryId());
-//
-//        Score savedScore = scoreService.saveScore(score);
-//        return ResponseEntity.ok(savedScore);
-//    }
-
+    /**
+     * Endpoint to save a score.
+     * It receives a ScoreDTO object, sends it to the JADE HttpServerAgent, and returns a response.
+     *
+     * @param scoreDTO The score data transfer object containing score details.
+     * @return A string message indicating the outcome of the save operation.
+     */
     @PostMapping("/scores")
     public String saveScore(@RequestBody ScoreDTO scoreDTO) {
         // Send scoreDTO to the JADE HttpServerAgent
@@ -53,6 +52,14 @@ public class ScoreController {
     }
 
 
+    /**
+     * Endpoint to get the leaderboard for a specific category.
+     * It retrieves the top scores for the category based on a limit and returns them.
+     *
+     * @param categoryId The ID of the category for which the leaderboard is requested.
+     * @param limit The maximum number of top scores to return.
+     * @return A response entity containing the list of top scores.
+     */
     @GetMapping("/leaderboard/{categoryId}")
     public ResponseEntity<List<Score>> getLeaderboard(@PathVariable Long categoryId, @RequestParam(defaultValue = "5") int limit) {
         List<Score> topScores = scoreService.getTopScores(categoryId, limit);

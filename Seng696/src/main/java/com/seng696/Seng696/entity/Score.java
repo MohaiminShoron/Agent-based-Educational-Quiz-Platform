@@ -17,5 +17,5 @@ public class Score {
     private Integer scoreValue;
     private Long categoryId;
 
-    // Constructors, Getters, and Setters...
+
 }

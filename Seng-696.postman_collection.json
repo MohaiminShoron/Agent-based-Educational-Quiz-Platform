@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "99e7e486-682a-4827-ad55-145b495cecb4",
+		"name": "Seng-696",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11095785"
+	},
+	"item": [
+		{
+			"name": "user_registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"Mohaiminul Islam 11\",\r\n    \"email\" : \"hello1211@gmail.com\",\r\n    \"password\" : \"Hello12345\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/user_registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"user_registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"Mohaiminul Islam Shoron\",\r\n    \"password\" : \"Hello12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " fetch categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch questions by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/questions/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"questions",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save score",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 16,\r\n    \"username\": \"Mohaiminul Islam Shoron\",\r\n    \"scoreValue\": 25,\r\n    \"categoryId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/scores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"scores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "leaderboard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/quiz-platform-0.0.1-SNAPSHOT/api/leaderboard/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"quiz-platform-0.0.1-SNAPSHOT",
+						"api",
+						"leaderboard",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

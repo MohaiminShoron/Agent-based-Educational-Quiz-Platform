@@ -21,10 +21,7 @@ public class ScoreService {
         return scoreRepository.save(score);
     }
 
-//    public List<Score> getTopScores(Long categoryId, int limit) {
-//        // Assuming you have a method in your repository to find the top scores by category
-//        return scoreRepository.findTopScoresByCategory(categoryId, PageRequest.of(0, limit, Sort.by("scoreValue").descending()));
-//    }
+
 
     public List<Score> getTopScores(Long categoryId, int limit) {
         // Create a PageRequest object with the desired number of results and sort order

@@ -26,25 +26,5 @@ public class CategoryService {
         final String url = "http://localhost:8000/registerUser"; // JADE HTTP server endpoint
         return restTemplate.postForObject(url, userRegistration, String.class);
     }
-//    @Autowired
-//    public CategoryService(CategoryRepository categoryRepository) {
-//        this.categoryRepository = categoryRepository;
-//    }
 
-
-//    public List<Category> getAllCategories() {
-//        return categoryRepository.findAll();
-//    }
-//
-//    public List<Category> getQuizCategories() {
-//        final String url = "http://localhost:8000/getCategories";
-//        String[] categories = restTemplate.getForObject(url, String[].class);
-//
-//        List<Category> categoryDTOs = new ArrayList<>();
-//        int id = 1;
-//        for (String categoryName : categories) {
-//            categoryDTOs.add(new Category(id++, categoryName));
-//        }
-//        return categoryDTOs;
-//    }
 }

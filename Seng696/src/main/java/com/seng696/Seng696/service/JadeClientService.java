@@ -4,6 +4,10 @@ import com.seng696.Seng696.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * This service is responsible for interacting with the JADE agent system via HTTP.
+ * It provides functionality to send data to JADE agents and receive responses.
+ */
 @Service
 public class JadeClientService {
 

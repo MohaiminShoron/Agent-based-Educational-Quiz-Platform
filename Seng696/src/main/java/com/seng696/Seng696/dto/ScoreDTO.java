@@ -9,5 +9,5 @@ public class ScoreDTO {
     private Integer scoreValue;
     private Long categoryId;
 
-    // Constructors, Getters, and Setters...
+
 }
