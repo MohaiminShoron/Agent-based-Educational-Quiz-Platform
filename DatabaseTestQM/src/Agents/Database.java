@@ -1,3 +1,9 @@
+/*
+   The database handles all the mechanism that will happen on the database
+   1. Retrieving information from the database.
+   2. Saving information from the database for future retrieval.
+*/
+
 package Agents;
 
 import jade.core.AID;
@@ -19,6 +25,7 @@ public class Database extends Agent {
     private static final String PASSWORD = "pknbgr86A@";
     private Gson gson;
 
+    // This is the setup() function which holds the 'agent has been started' comment and the implemented behaviours in this agent.
     @Override
     protected void setup() {
         System.out.println(getLocalName() + " is ready.");
@@ -28,7 +35,9 @@ public class Database extends Agent {
         addBehaviour(new HandleRetrievingQuestionsBehaviour());
     }
 
-    // Behaviour for handling requests from QuizmasterAgent
+    /* Behaviour for handling requests from QuizmasterAgent. It calls another function called 'sendCategories()' to fetch the 
+    categories from the databse. */
+    
     private class HandleQuizmasterRequestsBehaviour extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = receive();
@@ -41,6 +50,11 @@ public class Database extends Agent {
         }
     }
 
+    /* 
+    This function runs the query to fetch the categories from the database. These fetched categories are then sent to the 
+    interface agent for category selection. It runs exceptions if the entered command to fetch the categories is infeasible.
+    */
+    
     private void sendCategories() {
         String sql = "SELECT serialNumber, categoryName FROM categories ORDER BY serialNumber";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
@@ -61,7 +75,12 @@ public class Database extends Agent {
         }
     }
 
-    //new
+      /* 
+        Behaviour for handling requests from QuizmasterAgent.
+        This behaviour runs a function called 'sendQuestionList(category)'. This function receives the desired category and handles
+        retrieving the questions of the desired category from the database.
+     */
+    
     private class HandleRetrievingQuestionsBehaviour extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = receive();
@@ -76,6 +95,12 @@ public class Database extends Agent {
         }
     }
 
+   /* 
+    This function runs the query to fetch the questions for the desired category from the database. These fetched questions are 
+    then sent to the QuestionInterface agent for further processing. It runs an exception if the questions cannot be fetched 
+    for an invalid command.
+    */
+    
     private void sendQuestionList(String category) {
 
         String sql = "SELECT questionID, categoryID, questionText, option1, option2, option3, option4, correctAnswer FROM question WHERE categoryID =" +category+ " ORDER BY RAND()";
@@ -112,7 +137,13 @@ public class Database extends Agent {
         send(msg);
     }
 
-    // New Behaviour to handle UserInfo messages
+    /* 
+       Behaviour to  UserInfo messages
+       This behaviour saves the information received from the user to the database for registration, log-in and authentication
+       purpose. It calls a function called 'storeUserInfoInDatabase(userInfo)' which receives the user information and makes the
+       necessary arrangement to perform this feature.
+    */
+    
     private class HandleUserInfoBehaviour extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = receive();
@@ -124,7 +155,8 @@ public class Database extends Agent {
             }
         }
     }
-
+    
+    // The function to store user information to the database according to the database table.
     private void storeUserInfoInDatabase(UserInfo userInfo) {
         String sql = "INSERT INTO user (username, email, phoneNumber, password) VALUES (?, ?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
