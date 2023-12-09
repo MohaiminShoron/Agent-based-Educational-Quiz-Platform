@@ -1,3 +1,5 @@
+// This is a small agent that handles the printing feature of the computed scores generated from the whole quiz session.
+
 package Agents;
 
 import jade.core.Agent;
@@ -5,13 +7,19 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 
 public class Score extends Agent {
-
+    
+    // This is the setup() function that holds the 'agent has been started' comment and the implemented behaviours in this agent.
     @Override
     protected void setup() {
         System.out.println(getLocalName() + " is ready.");
         addBehaviour(new Score.publishScoreBehaviour());
     }
 
+    /*
+      This behaviour receives the computed score from the QuestionInterface agent and prints it for the user to see how much 
+      the user could score.
+    */
+    
     private class publishScoreBehaviour extends SimpleBehaviour {
         private boolean done = false;
 
