@@ -1,18 +1,20 @@
 # Seng-696-gr2
-Repository for our group project for SENG 696
-
-# Front-End
-
-This project is an educational quiz platform developed using Vue.js 3. It allows users to register, log in, and take quizzes on various topics. The application features a dynamic and user-friendly interface, making it suitable for users of all ages, including kids.
+The Educational Quiz Platform is a web-based application designed to offer an interactive and engaging quiz experience. It features Vue.js 3 as the front-end and on the backend we have a Spring Boot-based API middleware that interfaces with a JADE agent-based system. This platform allows users to register, take quizzes in various categories, and view their scores.
 
 ### Features
 
 - User registration and authentication.
-- Selection of quiz categories.
+- 4 quiz categories to select from.
 - Timed quizzes with multiple-choice questions.
-- Leaderboards displaying user rankings based on scores.
+- Leaderboards displaying user rankings based on scores per category.
 
-## Built With
+## Front-End
+
+This project is an educational quiz platform developed using Vue.js 3. It allows users to register, log in, and take quizzes on various topics. The application features a dynamic and user-friendly interface, making it suitable for users of all ages, including kids.
+
+
+
+### Built With
 
 - [Vue.js 3](https://vuejs.org/)
 - [Bootstrap 5](https://getbootstrap.com/)
@@ -48,3 +50,41 @@ This project is an educational quiz platform developed using Vue.js 3. It allows
 - Clone the repo - `git clone https://github.com/MohaiminShoron/Seng-696-gr2.git`.
 - Install project dependencies — `npm install`.
 - Launch the app — `npm run serve`, it will become available at [http://localhost:8080](http://localhost:8080/).
+
+## Backend
+
+### Getting Started
+
+These instructions will help you set up the project on your local machine for development and testing.
+
+### Prerequisites
+- Java 11
+- Spring Boot
+- JADE (Java Agent Development Framework)
+- MySQL
+
+### Architecture
+
+## Spring Boot Application (API Middleware)
+
+The Spring Boot application serves as an API middleware, facilitating communication between the frontend and the JADE agent system. It exposes RESTful endpoints for user registration and login, quiz interactions, score submissions, etc.
+
+###Key Endpoints:
+
+- POST /api/register: Registers a new user.
+- POST /api/login: Allows registered user to login.
+- GET /api/categories: Retrieves available quiz categories.
+- GET /api/questions/{category_id}: Retrieves multiple-choice questions for a given category.
+- POST /api/scores: Submits and saves quiz scores.
+- GET /api/leaderboard/{category_id}: Fetch top scores for given category to show leaderboard.
+
+## Agent-Communication Application
+
+The agent system uses JADE to handle different aspects of the quiz platform:
+
+- DatabaseAgent: Interacts with the MySQL database to store and retrieve data.
+- HttpServerAgent: Serves as a bridge between the Spring Boot application and the agent system.
+
+###Database Schema
+
+The database includes tables for users, scores, questions, and categories. The schema is designed to efficiently store and retrieve quiz-related data.
