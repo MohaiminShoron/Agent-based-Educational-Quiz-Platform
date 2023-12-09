@@ -1,3 +1,10 @@
+/*    
+    The interface  agent handles the mechanism of 
+    1. showing the quiz content.
+    2. receiving user inputs from the terminal.
+    3. Sending the necessary commands to the other agents in the system to initiate the quiz process.
+*/
+
 package Agents;
 
 import jade.core.AID;
@@ -77,7 +84,7 @@ public class Interface extends Agent {
     private Gson gson;
     private Set<String> availableCategories;
 
-
+    // This is the setup() function which holds the 'agent has been started' comment and the implemented behaviours in this agent.
     @Override
     protected void setup() {
         System.out.println(getLocalName() + " is ready.");
@@ -88,7 +95,9 @@ public class Interface extends Agent {
         addBehaviour(new ReceiveCategoryBehaviour());
     }
 
-    // Behavior class for user input
+    /* This behavior class is for user input. It sends the received information to the database agent to be saved in the MySql database.
+       It also sends a command to the QuizMaster Agent to initiate the quiz process.*/
+    
     private class UserInputBehaviour extends SimpleBehaviour {
         private boolean done = false;
 
@@ -124,7 +133,9 @@ public class Interface extends Agent {
         }
     }
 
-    // New Behavior class for receiving categories
+    /* This behavior class is for receiving categories from the database. It shows the available categories to the terminal so that 
+       the user/student can select their desired category of the quiz they want to partake in. */
+    
     private class ReceiveCategoryBehaviour extends SimpleBehaviour {
         private boolean done = false;
 
@@ -145,6 +156,9 @@ public class Interface extends Agent {
                 block();
             }
         }
+
+        /* This method is for the selection of the desired category, which is done by the user from the terminal. If user interface
+           has been implemented, then the same thing will be done on the user interface. */
 
         private void requestCategorySelection() {
             Scanner scanner = new Scanner(System.in);
