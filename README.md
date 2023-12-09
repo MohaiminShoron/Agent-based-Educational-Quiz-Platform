@@ -53,10 +53,6 @@ The frontend of this project is developed using Vue.js 3. It allows users to reg
 
 ## Backend
 
-### Getting Started
-
-These instructions will help you set up the project on your local machine for development and testing.
-
 ### Prerequisites
 - Java 11
 - Spring Boot
@@ -67,7 +63,7 @@ These instructions will help you set up the project on your local machine for de
 
 ## Spring Boot Application (API Middleware)
 
-The Spring Boot application serves as an API middleware, facilitating communication between the frontend and the JADE agent system. It exposes RESTful endpoints for user registration and login, quiz interactions, score submissions, etc.
+The Spring Boot application(Seng696 folder) serves as an API middleware, facilitating communication between the frontend and the JADE agent system. It exposes RESTful endpoints for user registration and login, quiz interactions, score submissions, etc.
 
 ### Key Endpoints:
 
