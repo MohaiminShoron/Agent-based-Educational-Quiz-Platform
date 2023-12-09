@@ -69,7 +69,7 @@ These instructions will help you set up the project on your local machine for de
 
 The Spring Boot application serves as an API middleware, facilitating communication between the frontend and the JADE agent system. It exposes RESTful endpoints for user registration and login, quiz interactions, score submissions, etc.
 
-###Key Endpoints:
+### Key Endpoints:
 
 - POST /api/register: Registers a new user.
 - POST /api/login: Allows registered user to login.
@@ -80,11 +80,54 @@ The Spring Boot application serves as an API middleware, facilitating communicat
 
 ## Agent-Communication Application
 
-The agent system uses JADE to handle different aspects of the quiz platform:
+The JADE agent system orchestrates the backend functionalities of the quiz platform, handling data operations and agent interactions.
 
-- DatabaseAgent: Interacts with the MySQL database to store and retrieve data.
-- HttpServerAgent: Serves as a bridge between the Spring Boot application and the agent system.
+### Roles of JADE Agents
 
-###Database Schema
+- HttpServerAgent: Acts as an interface between the Spring Boot application and the JADE system, handling HTTP requests and translating them into agent communication.
+- DatabaseAgent: Manages interactions with the MySQL database for storing and retrieving user data, scores, and categories.
 
-The database includes tables for users, scores, questions, and categories. The schema is designed to efficiently store and retrieve quiz-related data.
+
+## Database Schema
+
+The database schema for the Educational Quiz Platform is designed to support efficient storage and retrieval of quiz-related data. It comprises several key tables, each serving a specific purpose in the application:
+
+### Users Table
+- **Description**: Stores information about registered users.
+- **Fields**:
+  - `UserId` (Primary Key): A unique identifier for each user.
+  - `Username`: The user's chosen username.
+  - `Password`: The user's password (stored securely).
+  - `Email`: The user's email address.
+
+### Scores Table
+- **Description**: Keeps track of users' scores for different quiz attempts.
+- **Fields**:
+  - `ScoreId` (Primary Key): A unique identifier for each score entry.
+  - `UserId` (Foreign Key): Links to the `UserId` in the Users table.
+  - `ScoreValue`: The score achieved by the user.
+  - `CategoryId` (Foreign Key): The category of the quiz taken.
+
+### Questions Table
+- **Description**: Contains the quiz questions.
+- **Fields**:
+  - `QuestionId` (Primary Key): A unique identifier for each question.
+  - `CategoryId` (Foreign Key): The category to which the question belongs.
+  - `Text`: The text of the question.
+  - `Options`: The multiple-choice options for the question.
+  - `Answer`: The correct answer to the question.
+
+### Options Table
+- **Description**: Provides the multiple-choice options for each question.
+- **Fields**:
+  - `OptionId` (Primary Key): A unique identifier for each option.
+  - `QuestionId` (Foreign Key): Links to the `QuestionId` in the Questions table.
+  - `Text`: The options of a question.
+  - `IsCorrect`: Indicates whether this option is the correct answer to the question.
+
+
+### Categories Table
+- **Description**: Lists the different categories of quizzes available.
+- **Fields**:
+  - `CategoryId` (Primary Key): A unique identifier for each category.
+  - `CategoryName`: The name of the quiz category (e.g., Science, Mathematics).
