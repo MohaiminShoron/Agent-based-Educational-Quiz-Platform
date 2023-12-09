@@ -1,24 +1,37 @@
 <template>
+  <!-- Container to center the login card on the page -->
   <div class="login-container">
     <div class="card login-card">
       <div class="card-body">
         <h2 class="card-title text-center mb-4">Login</h2>
+        <!-- Login form with event handler to prevent default form submission -->
         <form @submit.prevent="loginUser">
           <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
-            <input type="text" v-model="username" class="form-control" id="username" required />
+            <input
+              type="text"
+              v-model="username"
+              class="form-control"
+              id="username"
+              required
+            />
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password:</label>
-            <input type="password" v-model="password" class="form-control" id="password" required />
+            <input
+              type="password"
+              v-model="password"
+              class="form-control"
+              id="password"
+              required
+            />
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-success btn-lg">Login</button>
-            <router-link to="/register" class="btn btn-outline-primary btn-lg">Go to Register</router-link>
+            <router-link to="/register" class="btn btn-outline-primary btn-lg"
+              >Go to Register</router-link
+            >
           </div>
-          <!-- <div class="mt-4 text-center">
-            <router-link to="/register">Go to Register</router-link>
-          </div> -->
         </form>
       </div>
     </div>
@@ -29,33 +42,38 @@
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
   },
   methods: {
+    // Method to handle user login
     loginUser() {
+      // API call for user authentication
+      this.$axios
+        .post(`${process.env.VUE_APP_API_URL}/api/login`, {
+          username: this.username,
+          password: this.password,
+        })
+        .then((response) => {
+          localStorage.setItem("token", "response.data.token"); // Store authentication token and user details on successful login
+          this.$store.commit("setUser", {
+            userId: response.data.userId,
+            username: response.data.username,
+          });
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("username", response.data.username);
 
-      this.$axios.post(`${process.env.VUE_APP_API_URL}/api/login`, { username: this.username, password: this.password })
-        .then(response => {
-          localStorage.setItem('token', "response.data.token");
-          this.$store.commit('setUser', {
-          userId: response.data.userId,
-          username: response.data.username
-        });
-        localStorage.setItem('userId', response.data.userId);
-        localStorage.setItem('username', response.data.username);
-        
-        // Redirect the user to the home page after successful login
-        this.$router.push('/');
-      })
-        .catch(error => {
+          // Redirect the user to the home page after successful login
+          this.$router.push("/");
+        })
+        .catch((error) => {
           // Handle error
-          console.log("error: ", error)
-          alert("Login failed, please try again.")
+          console.log("error: ", error);
+          alert("Login failed, please try again.");
         });
 
-      console.log('Logging in user...');
+      console.log("Logging in user...");
     },
   },
 };
@@ -67,7 +85,7 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('~@/assets/background.jpg');
+  background-image: url("~@/assets/background.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -100,8 +118,8 @@ export default {
 }
 
 .btn-lg {
-  padding: 0.5rem 1rem; 
-  font-size: 1rem; 
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
 
 /*  media queries for responsiveness */

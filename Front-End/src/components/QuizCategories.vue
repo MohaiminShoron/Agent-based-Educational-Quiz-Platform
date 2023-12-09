@@ -4,13 +4,21 @@
       <div class="card-body">
         <h2 class="card-title text-center mb-4">Quiz Categories</h2>
         <div v-if="categories.length">
+          <!-- Check if categories are loaded -->
           <div v-for="category in categories" :key="category.id" class="mb-3">
+            <!-- Loop through each category and display it -->
             <div class="d-flex justify-content-between align-items-center">
               <h5 class="category-name">{{ category.name }}</h5>
-              <button @click="startQuiz(category.id)" class="btn btn-start-quiz">Start Quiz</button>
+              <button
+                @click="startQuiz(category.id)"
+                class="btn btn-start-quiz"
+              >
+                Start Quiz
+              </button>
             </div>
           </div>
         </div>
+        <!-- Show loading message if categories are not yet loaded -->
         <p v-else class="text-center">Loading categories...</p>
       </div>
     </div>
@@ -20,26 +28,28 @@
 export default {
   data() {
     return {
-      categories: [],
+      categories: [], // Initial empty array for categories
     };
   },
   created() {
-    this.fetchCategories();
+    this.fetchCategories(); // Fetch categories when the component is created
   },
   methods: {
     fetchCategories() {
+      // Axios call to get categories from the API
       this.$axios
         .get(`${process.env.VUE_APP_API_URL}/api/categories`)
         .then((response) => {
-          this.categories = response.data;
+          this.categories = response.data; // Populate the categories data property with the response
         })
         .catch((error) => {
+          // Log and alert if there is an error fetching the categories
           console.error("Error fetching categories:", error);
           alert("Failed to load categories.");
         });
     },
     startQuiz(categoryId) {
-      this.$router.push({ name: 'quiz', params: { categoryId } });
+      this.$router.push({ name: "quiz", params: { categoryId } }); // Method to navigate to the quiz page with the selected category ID
     },
   },
 };
@@ -52,7 +62,7 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('~@/assets/background.jpg');
+  background-image: url("~@/assets/background.jpg");
   background-size: cover;
   background-position: center;
 }

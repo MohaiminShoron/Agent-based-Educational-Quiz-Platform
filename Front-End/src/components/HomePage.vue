@@ -1,12 +1,22 @@
 <template>
+  <!-- Main container for the home page -->
   <div class="home-container">
     <div class="card home-card">
       <div class="card-body">
-        <h2 class="card-title text-center mb-4">Welcome to the Quiz Platform</h2>
-        <p class="card-text text-center">Start a quiz and test your knowledge!</p>
+        <h2 class="card-title text-center mb-4">
+          Welcome to the Quiz Platform
+        </h2>
+        <p class="card-text text-center">
+          Start a quiz and test your knowledge!
+        </p>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <router-link to="/categories" class="btn btn-primary btn-lg">Take a Quiz</router-link>
-          <button @click="logoutUser" class="btn btn-secondary btn-lg">Logout</button>
+          <!-- Navigation link to the quiz categories page -->
+          <router-link to="/categories" class="btn btn-primary btn-lg"
+            >Take a Quiz</router-link
+          >
+          <button @click="logoutUser" class="btn btn-secondary btn-lg">
+            Logout
+          </button>
         </div>
       </div>
     </div>
@@ -15,24 +25,23 @@
 
 <script>
 export default {
+  //lifecycle hook triggered when the component is created
   created() {
     // Check if user is logged in
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem("token")) {
       // User is not logged in, redirect to login page
-      this.$router.push('/login');
+      this.$router.push("/login");
     }
   },
   methods: {
     logoutUser() {
-      // // Clear token from localStorage
-      // localStorage.removeItem('token');
-
-      this.$store.dispatch('logoutUser');
-      // Redirect to login page
-      this.$router.push('/login');
+      // Dispatch the logout action defined in Vuex store
+      this.$store.dispatch("logoutUser");
+      // Redirect to login page after logout
+      this.$router.push("/login");
     },
     goToCategories() {
-      this.$router.push('/categories');
+      this.$router.push("/categories"); // Navigate to categories page
     },
   },
 };
@@ -45,7 +54,7 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('~@/assets/background.jpg');
+  background-image: url("~@/assets/background.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -63,31 +72,31 @@ export default {
 .card-title {
   font-size: 2rem;
   color: var(--bs-primary);
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
 }
 .card-text {
-  font-size: 1.25rem; 
-  color: var(--bs-secondary); 
-  margin-bottom: 1.5rem; 
+  font-size: 1.25rem;
+  color: var(--bs-secondary);
+  margin-bottom: 1.5rem;
 }
 .btn-primary {
-  background-color: #007bff; 
-  border-color: #007bff; 
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; 
-  border-color: #0056b3; 
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 .btn-secondary {
-  background-color: #6c757d; 
-  border-color: #6c757d; 
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
 .btn-secondary:hover {
-  background-color: #545b62; 
-  border-color: #545b62; 
+  background-color: #545b62;
+  border-color: #545b62;
 }
 .btn-lg {
   font-size: 1rem;
