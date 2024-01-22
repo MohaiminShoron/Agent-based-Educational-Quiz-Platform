@@ -1,4 +1,4 @@
-# Seng-696-gr2
+# Agent-Based Educational Quiz Platform
 The Educational Quiz Platform is a web-based application designed to offer an interactive and engaging quiz experience. It features Vue.js 3 as the front-end and on the backend we have a Spring Boot-based API middleware that interfaces with a JADE agent-based system. This platform allows users to register, take quizzes in various categories, and view their scores.
 
 ### Features
